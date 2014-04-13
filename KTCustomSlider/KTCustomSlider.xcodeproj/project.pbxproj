@@ -1,0 +1,472 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		CFBEAB7418FAEB28000D840F /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CFBEAB7318FAEB28000D840F /* Foundation.framework */; };
+		CFBEAB7618FAEB28000D840F /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CFBEAB7518FAEB28000D840F /* CoreGraphics.framework */; };
+		CFBEAB7818FAEB28000D840F /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CFBEAB7718FAEB28000D840F /* UIKit.framework */; };
+		CFBEAB7E18FAEB28000D840F /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = CFBEAB7C18FAEB28000D840F /* InfoPlist.strings */; };
+		CFBEAB8018FAEB28000D840F /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = CFBEAB7F18FAEB28000D840F /* main.m */; };
+		CFBEAB8418FAEB28000D840F /* KTAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = CFBEAB8318FAEB28000D840F /* KTAppDelegate.m */; };
+		CFBEAB8718FAEB28000D840F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CFBEAB8518FAEB28000D840F /* Main.storyboard */; };
+		CFBEAB8A18FAEB28000D840F /* KTViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CFBEAB8918FAEB28000D840F /* KTViewController.m */; };
+		CFBEAB8C18FAEB28000D840F /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CFBEAB8B18FAEB28000D840F /* Images.xcassets */; };
+		CFBEAB9318FAEB28000D840F /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CFBEAB9218FAEB28000D840F /* XCTest.framework */; };
+		CFBEAB9418FAEB28000D840F /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CFBEAB7318FAEB28000D840F /* Foundation.framework */; };
+		CFBEAB9518FAEB28000D840F /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CFBEAB7718FAEB28000D840F /* UIKit.framework */; };
+		CFBEAB9D18FAEB28000D840F /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = CFBEAB9B18FAEB28000D840F /* InfoPlist.strings */; };
+		CFBEAB9F18FAEB28000D840F /* KTCustomSliderTests.m in Sources */ = {isa = PBXBuildFile; fileRef = CFBEAB9E18FAEB28000D840F /* KTCustomSliderTests.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		CFBEAB9618FAEB28000D840F /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = CFBEAB6818FAEB28000D840F /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = CFBEAB6F18FAEB28000D840F;
+			remoteInfo = KTCustomSlider;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		CFBEAB7018FAEB28000D840F /* KTCustomSlider.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = KTCustomSlider.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		CFBEAB7318FAEB28000D840F /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		CFBEAB7518FAEB28000D840F /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		CFBEAB7718FAEB28000D840F /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		CFBEAB7B18FAEB28000D840F /* KTCustomSlider-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "KTCustomSlider-Info.plist"; sourceTree = "<group>"; };
+		CFBEAB7D18FAEB28000D840F /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		CFBEAB7F18FAEB28000D840F /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		CFBEAB8118FAEB28000D840F /* KTCustomSlider-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "KTCustomSlider-Prefix.pch"; sourceTree = "<group>"; };
+		CFBEAB8218FAEB28000D840F /* KTAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KTAppDelegate.h; sourceTree = "<group>"; };
+		CFBEAB8318FAEB28000D840F /* KTAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = KTAppDelegate.m; sourceTree = "<group>"; };
+		CFBEAB8618FAEB28000D840F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		CFBEAB8818FAEB28000D840F /* KTViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KTViewController.h; sourceTree = "<group>"; };
+		CFBEAB8918FAEB28000D840F /* KTViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = KTViewController.m; sourceTree = "<group>"; };
+		CFBEAB8B18FAEB28000D840F /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		CFBEAB9118FAEB28000D840F /* KTCustomSliderTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = KTCustomSliderTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		CFBEAB9218FAEB28000D840F /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
+		CFBEAB9A18FAEB28000D840F /* KTCustomSliderTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "KTCustomSliderTests-Info.plist"; sourceTree = "<group>"; };
+		CFBEAB9C18FAEB28000D840F /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		CFBEAB9E18FAEB28000D840F /* KTCustomSliderTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = KTCustomSliderTests.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		CFBEAB6D18FAEB28000D840F /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CFBEAB7618FAEB28000D840F /* CoreGraphics.framework in Frameworks */,
+				CFBEAB7818FAEB28000D840F /* UIKit.framework in Frameworks */,
+				CFBEAB7418FAEB28000D840F /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		CFBEAB8E18FAEB28000D840F /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CFBEAB9318FAEB28000D840F /* XCTest.framework in Frameworks */,
+				CFBEAB9518FAEB28000D840F /* UIKit.framework in Frameworks */,
+				CFBEAB9418FAEB28000D840F /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		CFBEAB6718FAEB28000D840F = {
+			isa = PBXGroup;
+			children = (
+				CFBEAB7918FAEB28000D840F /* KTCustomSlider */,
+				CFBEAB9818FAEB28000D840F /* KTCustomSliderTests */,
+				CFBEAB7218FAEB28000D840F /* Frameworks */,
+				CFBEAB7118FAEB28000D840F /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		CFBEAB7118FAEB28000D840F /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				CFBEAB7018FAEB28000D840F /* KTCustomSlider.app */,
+				CFBEAB9118FAEB28000D840F /* KTCustomSliderTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		CFBEAB7218FAEB28000D840F /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				CFBEAB7318FAEB28000D840F /* Foundation.framework */,
+				CFBEAB7518FAEB28000D840F /* CoreGraphics.framework */,
+				CFBEAB7718FAEB28000D840F /* UIKit.framework */,
+				CFBEAB9218FAEB28000D840F /* XCTest.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		CFBEAB7918FAEB28000D840F /* KTCustomSlider */ = {
+			isa = PBXGroup;
+			children = (
+				CFBEAB8218FAEB28000D840F /* KTAppDelegate.h */,
+				CFBEAB8318FAEB28000D840F /* KTAppDelegate.m */,
+				CFBEAB8518FAEB28000D840F /* Main.storyboard */,
+				CFBEAB8818FAEB28000D840F /* KTViewController.h */,
+				CFBEAB8918FAEB28000D840F /* KTViewController.m */,
+				CFBEAB8B18FAEB28000D840F /* Images.xcassets */,
+				CFBEAB7A18FAEB28000D840F /* Supporting Files */,
+			);
+			path = KTCustomSlider;
+			sourceTree = "<group>";
+		};
+		CFBEAB7A18FAEB28000D840F /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				CFBEAB7B18FAEB28000D840F /* KTCustomSlider-Info.plist */,
+				CFBEAB7C18FAEB28000D840F /* InfoPlist.strings */,
+				CFBEAB7F18FAEB28000D840F /* main.m */,
+				CFBEAB8118FAEB28000D840F /* KTCustomSlider-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		CFBEAB9818FAEB28000D840F /* KTCustomSliderTests */ = {
+			isa = PBXGroup;
+			children = (
+				CFBEAB9E18FAEB28000D840F /* KTCustomSliderTests.m */,
+				CFBEAB9918FAEB28000D840F /* Supporting Files */,
+			);
+			path = KTCustomSliderTests;
+			sourceTree = "<group>";
+		};
+		CFBEAB9918FAEB28000D840F /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				CFBEAB9A18FAEB28000D840F /* KTCustomSliderTests-Info.plist */,
+				CFBEAB9B18FAEB28000D840F /* InfoPlist.strings */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		CFBEAB6F18FAEB28000D840F /* KTCustomSlider */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = CFBEABA218FAEB28000D840F /* Build configuration list for PBXNativeTarget "KTCustomSlider" */;
+			buildPhases = (
+				CFBEAB6C18FAEB28000D840F /* Sources */,
+				CFBEAB6D18FAEB28000D840F /* Frameworks */,
+				CFBEAB6E18FAEB28000D840F /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = KTCustomSlider;
+			productName = KTCustomSlider;
+			productReference = CFBEAB7018FAEB28000D840F /* KTCustomSlider.app */;
+			productType = "com.apple.product-type.application";
+		};
+		CFBEAB9018FAEB28000D840F /* KTCustomSliderTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = CFBEABA518FAEB28000D840F /* Build configuration list for PBXNativeTarget "KTCustomSliderTests" */;
+			buildPhases = (
+				CFBEAB8D18FAEB28000D840F /* Sources */,
+				CFBEAB8E18FAEB28000D840F /* Frameworks */,
+				CFBEAB8F18FAEB28000D840F /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				CFBEAB9718FAEB28000D840F /* PBXTargetDependency */,
+			);
+			name = KTCustomSliderTests;
+			productName = KTCustomSliderTests;
+			productReference = CFBEAB9118FAEB28000D840F /* KTCustomSliderTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		CFBEAB6818FAEB28000D840F /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				CLASSPREFIX = KT;
+				LastUpgradeCheck = 0510;
+				ORGANIZATIONNAME = ktran03;
+				TargetAttributes = {
+					CFBEAB9018FAEB28000D840F = {
+						TestTargetID = CFBEAB6F18FAEB28000D840F;
+					};
+				};
+			};
+			buildConfigurationList = CFBEAB6B18FAEB28000D840F /* Build configuration list for PBXProject "KTCustomSlider" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = CFBEAB6718FAEB28000D840F;
+			productRefGroup = CFBEAB7118FAEB28000D840F /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				CFBEAB6F18FAEB28000D840F /* KTCustomSlider */,
+				CFBEAB9018FAEB28000D840F /* KTCustomSliderTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		CFBEAB6E18FAEB28000D840F /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CFBEAB8C18FAEB28000D840F /* Images.xcassets in Resources */,
+				CFBEAB7E18FAEB28000D840F /* InfoPlist.strings in Resources */,
+				CFBEAB8718FAEB28000D840F /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		CFBEAB8F18FAEB28000D840F /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CFBEAB9D18FAEB28000D840F /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		CFBEAB6C18FAEB28000D840F /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CFBEAB8A18FAEB28000D840F /* KTViewController.m in Sources */,
+				CFBEAB8018FAEB28000D840F /* main.m in Sources */,
+				CFBEAB8418FAEB28000D840F /* KTAppDelegate.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		CFBEAB8D18FAEB28000D840F /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CFBEAB9F18FAEB28000D840F /* KTCustomSliderTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		CFBEAB9718FAEB28000D840F /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = CFBEAB6F18FAEB28000D840F /* KTCustomSlider */;
+			targetProxy = CFBEAB9618FAEB28000D840F /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		CFBEAB7C18FAEB28000D840F /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				CFBEAB7D18FAEB28000D840F /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		CFBEAB8518FAEB28000D840F /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				CFBEAB8618FAEB28000D840F /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		CFBEAB9B18FAEB28000D840F /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				CFBEAB9C18FAEB28000D840F /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		CFBEABA018FAEB28000D840F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		CFBEABA118FAEB28000D840F /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				ENABLE_NS_ASSERTIONS = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		CFBEABA318FAEB28000D840F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "KTCustomSlider/KTCustomSlider-Prefix.pch";
+				INFOPLIST_FILE = "KTCustomSlider/KTCustomSlider-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		CFBEABA418FAEB28000D840F /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "KTCustomSlider/KTCustomSlider-Prefix.pch";
+				INFOPLIST_FILE = "KTCustomSlider/KTCustomSlider-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+		CFBEABA618FAEB28000D840F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/KTCustomSlider.app/KTCustomSlider";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "KTCustomSlider/KTCustomSlider-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = "KTCustomSliderTests/KTCustomSliderTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Debug;
+		};
+		CFBEABA718FAEB28000D840F /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/KTCustomSlider.app/KTCustomSlider";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "KTCustomSlider/KTCustomSlider-Prefix.pch";
+				INFOPLIST_FILE = "KTCustomSliderTests/KTCustomSliderTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		CFBEAB6B18FAEB28000D840F /* Build configuration list for PBXProject "KTCustomSlider" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				CFBEABA018FAEB28000D840F /* Debug */,
+				CFBEABA118FAEB28000D840F /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		CFBEABA218FAEB28000D840F /* Build configuration list for PBXNativeTarget "KTCustomSlider" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				CFBEABA318FAEB28000D840F /* Debug */,
+				CFBEABA418FAEB28000D840F /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		CFBEABA518FAEB28000D840F /* Build configuration list for PBXNativeTarget "KTCustomSliderTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				CFBEABA618FAEB28000D840F /* Debug */,
+				CFBEABA718FAEB28000D840F /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = CFBEAB6818FAEB28000D840F /* Project object */;
+}
