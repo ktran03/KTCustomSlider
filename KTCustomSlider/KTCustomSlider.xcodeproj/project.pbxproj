@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		CF024B6D18FAEC6300EB904C /* KTSliderControl.m in Sources */ = {isa = PBXBuildFile; fileRef = CF024B6C18FAEC6300EB904C /* KTSliderControl.m */; };
 		CFBEAB7418FAEB28000D840F /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CFBEAB7318FAEB28000D840F /* Foundation.framework */; };
 		CFBEAB7618FAEB28000D840F /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CFBEAB7518FAEB28000D840F /* CoreGraphics.framework */; };
 		CFBEAB7818FAEB28000D840F /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CFBEAB7718FAEB28000D840F /* UIKit.framework */; };
@@ -34,6 +35,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		CF024B6B18FAEC6300EB904C /* KTSliderControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KTSliderControl.h; sourceTree = "<group>"; };
+		CF024B6C18FAEC6300EB904C /* KTSliderControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KTSliderControl.m; sourceTree = "<group>"; };
 		CFBEAB7018FAEB28000D840F /* KTCustomSlider.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = KTCustomSlider.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CFBEAB7318FAEB28000D840F /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		CFBEAB7518FAEB28000D840F /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -79,6 +82,24 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		CF024B6A18FAEBF500EB904C /* Custom Slider Class */ = {
+			isa = PBXGroup;
+			children = (
+				CF024B6B18FAEC6300EB904C /* KTSliderControl.h */,
+				CF024B6C18FAEC6300EB904C /* KTSliderControl.m */,
+			);
+			name = "Custom Slider Class";
+			sourceTree = "<group>";
+		};
+		CF024B6F18FAEC7E00EB904C /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				CFBEAB8818FAEB28000D840F /* KTViewController.h */,
+				CFBEAB8918FAEB28000D840F /* KTViewController.m */,
+			);
+			name = Controllers;
+			sourceTree = "<group>";
+		};
 		CFBEAB6718FAEB28000D840F = {
 			isa = PBXGroup;
 			children = (
@@ -114,10 +135,9 @@
 			children = (
 				CFBEAB8218FAEB28000D840F /* KTAppDelegate.h */,
 				CFBEAB8318FAEB28000D840F /* KTAppDelegate.m */,
+				CF024B6A18FAEBF500EB904C /* Custom Slider Class */,
+				CF024B6F18FAEC7E00EB904C /* Controllers */,
 				CFBEAB8518FAEB28000D840F /* Main.storyboard */,
-				CFBEAB8818FAEB28000D840F /* KTViewController.h */,
-				CFBEAB8918FAEB28000D840F /* KTViewController.m */,
-				CFBEAB8B18FAEB28000D840F /* Images.xcassets */,
 				CFBEAB7A18FAEB28000D840F /* Supporting Files */,
 			);
 			path = KTCustomSlider;
@@ -126,6 +146,7 @@
 		CFBEAB7A18FAEB28000D840F /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				CFBEAB8B18FAEB28000D840F /* Images.xcassets */,
 				CFBEAB7B18FAEB28000D840F /* KTCustomSlider-Info.plist */,
 				CFBEAB7C18FAEB28000D840F /* InfoPlist.strings */,
 				CFBEAB7F18FAEB28000D840F /* main.m */,
@@ -253,6 +274,7 @@
 				CFBEAB8A18FAEB28000D840F /* KTViewController.m in Sources */,
 				CFBEAB8018FAEB28000D840F /* main.m in Sources */,
 				CFBEAB8418FAEB28000D840F /* KTAppDelegate.m in Sources */,
+				CF024B6D18FAEC6300EB904C /* KTSliderControl.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -457,6 +479,7 @@
 				CFBEABA418FAEB28000D840F /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		CFBEABA518FAEB28000D840F /* Build configuration list for PBXNativeTarget "KTCustomSliderTests" */ = {
 			isa = XCConfigurationList;
@@ -465,6 +488,7 @@
 				CFBEABA718FAEB28000D840F /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
