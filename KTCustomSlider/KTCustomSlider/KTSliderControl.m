@@ -14,18 +14,25 @@
 {
     self = [super initWithFrame:frame];
     if (self) {
-        // Initialization code
+
     }
     return self;
 }
 
-/*
-// Only override drawRect: if you perform custom drawing.
-// An empty implementation adversely affects performance during animation.
-- (void)drawRect:(CGRect)rect
-{
-    // Drawing code
+#pragma mark - UIControl Methods
+
+-(BOOL)beginTrackingWithTouch:(UITouch *)touch withEvent:(UIEvent *)event{
+    [super beginTrackingWithTouch:touch withEvent:event];
+    return YES;
 }
-*/
+
+-(BOOL)continueTrackingWithTouch:(UITouch *)touch withEvent:(UIEvent *)event{
+    [super continueTrackingWithTouch:touch withEvent:event];
+    return YES;
+}
+
+-(void)endTrackingWithTouch:(UITouch *)touch withEvent:(UIEvent *)event{
+    [super endTrackingWithTouch:touch withEvent:event];    
+}
 
 @end
