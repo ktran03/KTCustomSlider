@@ -7,7 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "KTSliderControl.h"
 
 @interface KTViewController : UIViewController
+@property (weak, nonatomic) IBOutlet KTSliderControl *slider;
 
 @end

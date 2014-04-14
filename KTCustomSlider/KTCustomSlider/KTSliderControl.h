@@ -10,6 +10,11 @@
 
 @interface KTSliderControl : UIControl
 
-@property(assign) CGPoint lastPoint;
+@property(assign)CGPoint lastPoint;
+
+//
+@property(assign)int relativeControlValue;
+@property(assign)int maxSliderValue;
+@property(assign)int minSliderValue;
 
 @end
