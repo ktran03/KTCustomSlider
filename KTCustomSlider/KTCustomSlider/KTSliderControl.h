@@ -10,4 +10,6 @@
 
 @interface KTSliderControl : UIControl
 
+@property(assign) CGPoint lastPoint;
+
 @end

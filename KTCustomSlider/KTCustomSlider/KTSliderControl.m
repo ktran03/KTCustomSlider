@@ -23,6 +23,7 @@
 -(id)initWithCoder:(NSCoder *)aDecoder{
     if(self = [super initWithCoder:aDecoder]) {
         self.backgroundColor = [UIColor clearColor];
+        self.lastPoint = CGPointMake(self.frame.size.width/2, self.frame.size.height/2);
     }
     return self;
 }
@@ -35,6 +36,10 @@
 
 -(BOOL)continueTrackingWithTouch:(UITouch *)touch withEvent:(UIEvent *)event{
     [super continueTrackingWithTouch:touch withEvent:event];
+    CGPoint lastPointUserTouched = [touch locationInView:self];
+    self.lastPoint = lastPointUserTouched;
+    [self sendActionsForControlEvents:UIControlEventValueChanged];
+    [self setNeedsDisplay];
     return YES;
 }
 
@@ -46,6 +51,7 @@
 -(void)drawRect:(CGRect)rect{
     [super drawRect:rect];
 
+    //draw bar
     [[UIColor grayColor] set];
     CGContextRef ctx = UIGraphicsGetCurrentContext();
     CGContextSetLineWidth(ctx,self.frame.size.height/4);
@@ -54,18 +60,13 @@
     CGContextSetShadowWithColor(ctx, CGSizeMake(0, 0), 2, [UIColor blackColor].CGColor);
     CGContextStrokePath(ctx);
     
-    [self drawHandle:ctx];
-}
-
--(void)drawHandle:(CGContextRef)ctx{
+    //draw knob
     CGContextSaveGState(ctx);
     CGContextSetShadowWithColor(ctx, CGSizeMake(0, 0), 2, [UIColor blackColor].CGColor);
-    CGRect handleRect = CGRectMake(self.frame.size.width/2-10.0f, self.frame.size.height/2-10.0f, 20.0f, 20.0f);
+    CGRect handleRect = CGRectMake(self.lastPoint.x-10.0f,self.frame.size.height/2-10.0f, 20.0f, 20.0f);
     [[UIColor colorWithWhite:1.0 alpha:0.7]set];
     CGContextFillEllipseInRect(ctx, handleRect);
-    
     CGContextRestoreGState(ctx);
 }
-
 
 @end
