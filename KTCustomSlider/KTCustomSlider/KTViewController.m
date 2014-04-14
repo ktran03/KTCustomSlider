@@ -19,7 +19,7 @@
     [super viewDidLoad];
     self.slider.maxSliderValue = 100;
     self.slider.minSliderValue = 0;
-    self.slider.relativeControlValue = 50;
+    self.slider.relativeControlValue = 30;
 }
 
 - (void)didReceiveMemoryWarning

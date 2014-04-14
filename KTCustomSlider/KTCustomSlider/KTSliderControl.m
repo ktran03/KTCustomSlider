@@ -11,7 +11,16 @@
 #define midBarHeight self.frame.size.height/2
 #define midBarWidth self.frame.size.width/2
 
-@implementation KTSliderControl
+#define controlPointXCoord ((self.relativeControlValue-self.minSliderValue)/(self.maxSliderValue-self.minSliderValue))*(self.frame.size.width)
+
+#define convertLastPointToValue ((self.lastPoint.x/(self.frame.size.width-20.0))*(self.maxSliderValue-self.minSliderValue))
+
+
+@implementation KTSliderControl{
+    UILabel *minLabel;
+    UILabel *maxLabel;
+    UILabel *currValueLabel;
+}
 
 #pragma mark - Initializers
 - (id)initWithFrame:(CGRect)frame
@@ -26,13 +35,45 @@
 -(id)initWithCoder:(NSCoder *)aDecoder{
     if(self = [super initWithCoder:aDecoder]) {
         self.backgroundColor = [UIColor clearColor];
-        self.relativeControlValue = 50; //have to change these to user settable
+        self.relativeControlValue = 30; //have to change these to user settable
         self.minSliderValue = 0;
         self.maxSliderValue = 100;
-        self.lastPoint = CGPointMake(midBarWidth, midBarHeight);
-
+        self.lastPoint = CGPointMake(controlPointXCoord, midBarHeight);
+        if (!self.barInnerColorLeft) {
+            self.barInnerColorLeft = [UIColor yellowColor];
+        }
+        if (!self.barInnerColorRight) {
+            self.barInnerColorRight = [UIColor greenColor];
+        }
+        
+        minLabel = [[UILabel alloc] initWithFrame:CGRectMake(10.0, midBarHeight, 40, 40)];
+        minLabel.textColor = [UIColor grayColor];
+        minLabel.font = [UIFont fontWithName:@"Helvetica Neue" size:12.0];
+        minLabel.textAlignment = NSTextAlignmentLeft;
+        minLabel.text = [NSString stringWithFormat:@"%d", (int)self.minSliderValue];
+        [self addSubview:minLabel];
+        
+        maxLabel = [[UILabel alloc] initWithFrame:CGRectMake(self.frame.size.width-40.0, midBarHeight, 40, 40)];
+        maxLabel.textColor = [UIColor grayColor];
+        maxLabel.font = [UIFont fontWithName:@"Helvetica Neue" size:12.0];
+        maxLabel.textAlignment = NSTextAlignmentRight;
+        maxLabel.text = [NSString stringWithFormat:@"%d", (int)self.maxSliderValue];
+        [self addSubview:maxLabel];
+        
+        currValueLabel = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, 40, 40)];
+        [currValueLabel setCenter:CGPointMake(controlPointXCoord, midBarHeight)];
+        currValueLabel.textColor = [UIColor grayColor];
+        currValueLabel.font = [UIFont fontWithName:@"Helvetica Neue" size:10.0];
+        currValueLabel.textAlignment = NSTextAlignmentCenter;
+        currValueLabel.text = [NSString stringWithFormat:@"%f", self.relativeControlValue];
+        [self addSubview:currValueLabel];
     }
     return self;
+}
+
+-(void)layoutSubviews{
+    [currValueLabel setCenter:CGPointMake(self.lastPoint.x, midBarHeight)];
+    currValueLabel.text = [NSString stringWithFormat:@"%i", (int)convertLastPointToValue];
 }
 
 #pragma mark - UIControl Methods
@@ -47,6 +88,7 @@
     self.lastPoint = lastPointUserTouched;
     [self sendActionsForControlEvents:UIControlEventValueChanged];
     [self setNeedsDisplay];
+    [self setNeedsLayout];
     return YES;
 }
 
@@ -73,9 +115,9 @@
     
     //draw undertone color
     if (self.lastPoint.x>controlPointX) {
-        [[UIColor redColor] set];
+        [self.barInnerColorRight set];
     }else{
-        [[UIColor greenColor] set];
+        [self.barInnerColorLeft set];
     }
     CGContextSetLineWidth(context, self.frame.size.height/4);
     CGContextMoveToPoint(context, controlPointX, midBarHeight);
@@ -83,9 +125,9 @@
     CGContextSetShadowWithColor(context, CGSizeMake(0, 0), 2, [UIColor blackColor].CGColor);
     CGContextStrokePath(context);
     
-    //draw control value triangle
+    //draw control triangle
     UIBezierPath *trianglePath = [[UIBezierPath alloc] init];
-    CGFloat triangleHeight = self.frame.size.height/3;
+    CGFloat triangleHeight = 15;
     CGFloat triangleWidth = triangleHeight;
 
     CGPoint firstPoint = CGPointZero;

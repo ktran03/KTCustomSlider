@@ -11,10 +11,14 @@
 @interface KTSliderControl : UIControl
 
 @property(assign)CGPoint lastPoint;
+@property(assign)CGFloat currentValue;
 
 //
-@property(assign)int relativeControlValue;
-@property(assign)int maxSliderValue;
-@property(assign)int minSliderValue;
+@property(assign)float relativeControlValue;
+@property(assign)float maxSliderValue;
+@property(assign)float minSliderValue;
+
+@property(strong,nonatomic)UIColor *barInnerColorLeft;
+@property(strong,nonatomic)UIColor *barInnerColorRight;
 
 @end
