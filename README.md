@@ -1,7 +1,7 @@
 ## KTCustomSlider
 
 <p align=“left” >
-  <img src="http://imgur.com/gXBE9zx" alt=“KTCustomSlider” title=“KT”CustomSlider>
+  <img src="http://i.imgur.com/gXBE9zx.gif" alt=“KTCustomSlider” title=“KT”CustomSlider>
 </p>
 
 KTCustomSlider is a simple slider control for iOS and Mac OS X. It provides additional features not available in UISlider.
