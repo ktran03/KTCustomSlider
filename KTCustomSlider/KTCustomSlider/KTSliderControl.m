@@ -12,6 +12,7 @@
 #define midBarWidth self.frame.size.width/2
 #define controlPointXCoord ((self.relativeControlValue-self.minSliderValue)/(self.maxSliderValue-self.minSliderValue))*(self.frame.size.width)
 #define convertLastPointToValue ((self.lastPoint.x/(self.frame.size.width-20.0))*(self.maxSliderValue-self.minSliderValue))
+#define paddingGeneral 10.0f
 
 @implementation KTSliderControl{
     UILabel *minLabel;
@@ -38,7 +39,7 @@
 
 -(void)performInitialization{
     self.backgroundColor = [UIColor clearColor];
-    self.relativeControlValue = 30; //have to change these to user settable
+    self.relativeControlValue = 50; //have to change these to user settable
     self.minSliderValue = 0;
     self.maxSliderValue = 100;
     self.lastPoint = CGPointMake(controlPointXCoord, midBarHeight);
@@ -53,14 +54,14 @@
 }
 
 -(void)configureValueLabels{
-    minLabel = [[UILabel alloc] initWithFrame:CGRectMake(10.0, midBarHeight, 40, 40)];
+    minLabel = [[UILabel alloc] initWithFrame:CGRectMake(paddingGeneral, midBarHeight, 40, 40)];
     minLabel.textColor = [UIColor grayColor];
     minLabel.font = [UIFont fontWithName:@"Helvetica Neue" size:12.0];
     minLabel.textAlignment = NSTextAlignmentLeft;
     minLabel.text = [NSString stringWithFormat:@"%d", (int)self.minSliderValue];
     [self addSubview:minLabel];
     
-    maxLabel = [[UILabel alloc] initWithFrame:CGRectMake(self.frame.size.width-40.0, midBarHeight, 40, 40)];
+    maxLabel = [[UILabel alloc] initWithFrame:CGRectMake(self.frame.size.width-45.0, midBarHeight, 40, 40)];
     maxLabel.textColor = [UIColor grayColor];
     maxLabel.font = [UIFont fontWithName:@"Helvetica Neue" size:12.0];
     maxLabel.textAlignment = NSTextAlignmentRight;
@@ -88,8 +89,15 @@
 
 -(BOOL)continueTrackingWithTouch:(UITouch *)touch withEvent:(UIEvent *)event{
     [super continueTrackingWithTouch:touch withEvent:event];
+    
     CGPoint lastPointUserTouched = [touch locationInView:self];
     self.lastPoint = lastPointUserTouched;
+    if (self.lastPoint.x<=paddingGeneral) {
+        self.lastPoint = CGPointMake(paddingGeneral, midBarHeight);
+    }else if (self.lastPoint.x>=(self.frame.size.width-(paddingGeneral*2))){
+        self.lastPoint = CGPointMake(self.frame.size.width-(paddingGeneral*2), midBarHeight);
+    }
+    
     [self sendActionsForControlEvents:UIControlEventValueChanged];
     [self setNeedsDisplay];
     [self setNeedsLayout];
@@ -103,6 +111,7 @@
 #pragma mark - Draw Methods
 -(void)drawRect:(CGRect)rect{
     [super drawRect:rect];
+    
     CGContextRef context = UIGraphicsGetCurrentContext();
     [self drawBar:context];
     [self drawUndertone:context];
@@ -113,8 +122,8 @@
 -(void)drawBar:(CGContextRef)context{
     [[UIColor grayColor] set];
     CGContextSetLineWidth(context,midBarHeight/2);
-    CGContextMoveToPoint(context,10.0f,midBarHeight);
-    CGContextAddLineToPoint(context,self.frame.size.width-10.0f, midBarHeight);
+    CGContextMoveToPoint(context,paddingGeneral,midBarHeight);
+    CGContextAddLineToPoint(context,self.frame.size.width-paddingGeneral, midBarHeight);
     CGContextSetShadowWithColor(context, CGSizeMake(0, 0), 2, [UIColor blackColor].CGColor);
     CGContextStrokePath(context);
 }
@@ -158,7 +167,7 @@
     CGContextSaveGState(context);
     {
         CGContextSetShadowWithColor(context, CGSizeMake(0, 0), 2, [UIColor blackColor].CGColor);
-        CGRect handleRect = CGRectMake(self.lastPoint.x-10.0f,midBarHeight-10.0f, 20.0f, 20.0f);
+        CGRect handleRect = CGRectMake(self.lastPoint.x-paddingGeneral,midBarHeight-paddingGeneral, 20.0f, 20.0f);
         [[UIColor colorWithWhite:1.0 alpha:0.7]set];
         CGContextFillEllipseInRect(context, handleRect);
     }
