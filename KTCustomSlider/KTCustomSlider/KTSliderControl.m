@@ -39,7 +39,7 @@
 
 -(void)performInitialization{
     self.backgroundColor = [UIColor clearColor];
-    self.relativeControlValue = 50; //have to change these to user settable
+    self.relativeControlValue = 30; //have to change these to user settable
     self.minSliderValue = 0;
     self.maxSliderValue = 100;
     self.lastPoint = CGPointMake(controlPointXCoord, midBarHeight);
