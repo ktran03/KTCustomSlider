@@ -18,12 +18,6 @@
 {
     [super viewDidLoad];
     
-KTSliderControl *slider = [[KTSliderControl alloc]initWithFrame:CGRectMake(0, 0, 300, 30)];
-slider.maxSliderValue = 100;
-slider.minSliderValue = 0;
-slider.relativeControlValue = 35;
-slider.barInnerColorLeft = [UIColor yellowColor];
-slider.barInnerColorRight = [UIColor greenColor];
 }
 
 - (void)didReceiveMemoryWarning

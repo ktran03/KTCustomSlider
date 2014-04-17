@@ -10,8 +10,8 @@
 
 @interface KTSliderControl : UIControl
 
-@property(assign)CGPoint lastPoint;
-@property(assign)CGFloat currentValue;
+@property(assign)float lastPoint;
+@property(assign)float currentValue;
 
 //
 @property(assign)float relativeControlValue;
