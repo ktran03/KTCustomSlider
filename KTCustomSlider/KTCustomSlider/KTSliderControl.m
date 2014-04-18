@@ -98,8 +98,6 @@
     [self updateValueLabels];
 }
 
-
-
 -(void)calculateCurrentValue{
     self.currentValue = ceil((((self.lastPoint-self.barMargin)/barWidth)*(self.maxSliderValue-self.minSliderValue))+self.minSliderValue);
 }
@@ -151,6 +149,7 @@
 -(void)drawBar:(CGContextRef)context{
     [[UIColor grayColor] set];
     CGContextSetLineWidth(context,self.barHeight);
+    CGContextSetLineCap(context,kCGLineCapRound);
     CGContextMoveToPoint(context,self.barMargin,verticalCenter);
     CGContextAddLineToPoint(context,self.frame.size.width-self.barMargin, verticalCenter);
     CGContextSetShadowWithColor(context, CGSizeMake(0, 0), 2, [UIColor blackColor].CGColor);
@@ -163,7 +162,7 @@
     }else{
         [self.barInnerColorLeft set];
     }
-    CGContextSetLineWidth(context, self.frame.size.height/4);
+    CGContextSetLineCap(context,0);
     CGContextMoveToPoint(context, controlPointXCoord, verticalCenter);
     CGContextAddLineToPoint(context, self.lastPoint, verticalCenter);
     CGContextSetShadowWithColor(context, CGSizeMake(0, 0), 2, [UIColor blackColor].CGColor);
@@ -175,8 +174,9 @@
     CGFloat triangleWidth = self.triangleSize;
     
     CGPoint firstPoint = CGPointZero;
+    int pad = 5;
     firstPoint.x = controlPointXCoord;
-    firstPoint.y = verticalCenter+5;
+    firstPoint.y = verticalCenter+pad;
     [trianglePath moveToPoint:firstPoint];
     [trianglePath addLineToPoint:CGPointMake(firstPoint.x+(triangleWidth/2.0), firstPoint.y+self.triangleSize)];
     [trianglePath addLineToPoint:CGPointMake(firstPoint.x-(triangleWidth/2.0), firstPoint.y+self.triangleSize)];

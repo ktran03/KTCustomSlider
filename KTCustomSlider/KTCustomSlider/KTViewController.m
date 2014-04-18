@@ -25,7 +25,7 @@
     slider.maxSliderValue = 100;
     slider.controlValue = 74;
     
-    slider.barHeight = 15;
+    slider.barHeight = 10;
     slider.barMargin = 30;
     slider.triangleSize = 10;
     slider.knobSize = 30;
