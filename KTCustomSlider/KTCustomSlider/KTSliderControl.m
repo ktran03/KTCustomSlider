@@ -15,20 +15,22 @@
 
 #define controlPointXCoord ((((self.relativeControlValue-self.minSliderValue)/(self.maxSliderValue-self.minSliderValue))*(barWidth))+paddingGeneral)
 
-#define convertLastPointToValue ((self.lastPoint/barWidth)*(self.maxSliderValue-self.minSliderValue))
+#define convertLastPointToValue (((self.lastPoint-paddingGeneral)/barWidth)*(self.maxSliderValue-self.minSliderValue))
 
 #define convertValueToPoint
 
-#define paddingGeneral 15.0f
+#define paddingGeneral 15
 
-#define triangleHeight 15.0f
+#define triangleHeight 15
 
-#define knobLengthAndWidth 20.0f
+#define knobLengthAndWidth 20
 
 @implementation KTSliderControl{
     UILabel *minLabel;
     UILabel *maxLabel;
     UILabel *currValueLabel;
+    
+    int pointsPerUnit;
     
     BOOL isInTrackingMode;
 }
@@ -52,9 +54,9 @@
 
 -(void)performInitialization{
     self.backgroundColor = [UIColor clearColor];
-    self.relativeControlValue = 30;
-    self.minSliderValue = 1;
-    self.maxSliderValue = 10;
+    self.relativeControlValue = 0;
+    self.minSliderValue = 0;
+    self.maxSliderValue = 100;
     self.lastPoint = controlPointXCoord;
     if (!self.barInnerColorLeft) {
         self.barInnerColorLeft = [UIColor yellowColor];
@@ -62,6 +64,8 @@
     if (!self.barInnerColorRight) {
         self.barInnerColorRight = [UIColor greenColor];
     }
+    
+    pointsPerUnit = barWidth / (self.maxSliderValue - self.minSliderValue);
     
     [self configureValueLabels];
 }
@@ -77,9 +81,9 @@
 }
 
 -(void)layoutSubviews{
-//    NSLog(@"%f", self.lastPoint);
-//    [currValueLabel setCenter:CGPointMake(self.lastPoint, barHeightMid)];
-//    currValueLabel.text = [NSString stringWithFormat:@"%d", (int)convertLastPointToValue-5];
+    NSLog(@"%f", convertLastPointToValue);
+    [currValueLabel setCenter:CGPointMake(self.lastPoint, barHeightMid)];
+    currValueLabel.text = [NSString stringWithFormat:@"%d", (int)convertLastPointToValue];
 }
 
 #pragma mark - UIControl Methods
@@ -102,6 +106,8 @@
     if (self.lastPoint>=(self.frame.size.width-(paddingGeneral))) {
         self.lastPoint = self.frame.size.width-(paddingGeneral);
     }
+    
+    NSLog(@"%f", convertLastPointToValue);
     
     [self sendActionsForControlEvents:UIControlEventValueChanged];
     [self setNeedsDisplay];
@@ -183,5 +189,7 @@
     
     CGContextRestoreGState(context);
 }
+
+#pragma mark - Helper Methods
 
 @end
