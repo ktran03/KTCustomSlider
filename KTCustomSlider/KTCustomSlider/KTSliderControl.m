@@ -12,9 +12,7 @@
 #define barWidthMid (barWidth/2)
 #define barHeightMid self.frame.size.height/2
 
-#define controlPointXCoord (((([self.controlValue intValue]-self.minSliderValue)/(self.maxSliderValue-self.minSliderValue))*(barWidth))+self.barMargin)
-
-
+#define controlPointXCoord ((((self.controlValue-self.minSliderValue)/(self.maxSliderValue-self.minSliderValue))*(barWidth))+self.barMargin)
 #define convertLastPointToValue ceil((((self.lastPoint-self.barMargin)/barWidth)*(self.maxSliderValue-self.minSliderValue))+self.minSliderValue)
 
 
@@ -58,7 +56,7 @@
     }
     if (!self.maxSliderValue) { self.maxSliderValue = 100;
     }
-    if (!self.controlValue) { self.controlValue = @50;
+    if (!self.controlValue) { self.controlValue = 50;
     }
     
     self.lastPoint = controlPointXCoord;
@@ -69,7 +67,6 @@
 -(void)configureValueLabels{
     currValueLabel = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, 40, 40)];
     [currValueLabel setCenter:CGPointMake(controlPointXCoord, barHeightMid)];
-    NSLog(@"%@", NSStringFromCGRect(currValueLabel.frame));
     currValueLabel.textColor = [UIColor grayColor];
     currValueLabel.font = [UIFont fontWithName:@"Helvetica Neue" size:10.0];
     currValueLabel.textAlignment = NSTextAlignmentCenter;
@@ -79,21 +76,15 @@
 }
 
 -(void)layoutSubviews{
-    NSLog(@"lastpoint=%i", (int)self.lastPoint);
     [currValueLabel setCenter:CGPointMake(self.lastPoint, barHeightMid)];
-    NSLog(@"%@", NSStringFromCGRect(currValueLabel.frame));
     currValueLabel.text = [NSString stringWithFormat:@"%i", (int)convertLastPointToValue];
 }
 
-#pragma mark - Setters/Getters
-
--(void)setcontrolValue:(NSNumber *)controlValue{
-    _controlValue = controlValue;
+-(void)updateDisplay{
     self.lastPoint = controlPointXCoord;
     [self setNeedsDisplay];
     [self setNeedsLayout];
 }
-
 
 #pragma mark - UIControl Methods
 -(BOOL)beginTrackingWithTouch:(UITouch *)touch withEvent:(UIEvent *)event{
@@ -116,6 +107,7 @@
         self.lastPoint = self.frame.size.width-(self.barMargin);
     }
     
+    NSLog(@"%f", convertLastPointToValue);
     [self sendActionsForControlEvents:UIControlEventValueChanged];
     [self setNeedsDisplay];
     [self setNeedsLayout];

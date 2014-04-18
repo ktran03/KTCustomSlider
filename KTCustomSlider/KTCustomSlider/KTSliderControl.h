@@ -10,20 +10,19 @@
 
 @interface KTSliderControl : UIControl
 
-@property(assign)float lastPoint;
-@property(assign)float currentValue;
+@property(assign)double lastPoint;
 
-@property(strong,nonatomic)NSNumber *controlValue;
-@property(assign)float maxSliderValue;
-@property(assign)float minSliderValue;
+@property(assign)double controlValue;
+@property(assign)double maxSliderValue;
+@property(assign)double minSliderValue;
 
 @property(strong,nonatomic)UIColor *barInnerColorLeft;
 @property(strong,nonatomic)UIColor *barInnerColorRight;
 
-@property(assign)NSUInteger barMargin;
-@property(assign)NSUInteger triangleSize;
-@property(assign)NSUInteger knobSize;
+@property(assign)double barMargin;
+@property(assign)double triangleSize;
+@property(assign)double knobSize;
 
-
+-(void)updateDisplay;
 
 @end
