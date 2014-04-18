@@ -13,8 +13,8 @@
 @property(assign)float lastPoint;
 @property(assign)float currentValue;
 
-//
-@property(assign)float relativeControlValue;
+
+@property(strong,nonatomic)NSNumber *relativeControlValue;
 @property(assign)float maxSliderValue;
 @property(assign)float minSliderValue;
 

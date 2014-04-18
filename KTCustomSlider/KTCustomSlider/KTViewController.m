@@ -7,6 +7,7 @@
 //
 
 #import "KTViewController.h"
+#import "KTSliderControl.h"
 
 @interface KTViewController ()
 
@@ -17,6 +18,17 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    KTSliderControl *slider = [[KTSliderControl alloc]initWithFrame:CGRectMake(10, 50, 280, 30)];
+    
+    slider.barInnerColorLeft = [UIColor purpleColor];
+    slider.barInnerColorRight = [UIColor redColor];
+    
+    slider.maxSliderValue = 87654;
+    slider.minSliderValue = 999;
+    slider.relativeControlValue = @3467;
+    
+    [self.view addSubview:slider];
     
 }
 

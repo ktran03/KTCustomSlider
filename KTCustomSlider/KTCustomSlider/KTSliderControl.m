@@ -10,19 +10,13 @@
 
 #define barWidth (self.frame.size.width - (paddingGeneral*2))
 #define barWidthMid (barWidth/2)
-
 #define barHeightMid self.frame.size.height/2
 
-#define controlPointXCoord ((((self.relativeControlValue-self.minSliderValue)/(self.maxSliderValue-self.minSliderValue))*(barWidth))+paddingGeneral)
-
-#define convertLastPointToValue (((self.lastPoint-paddingGeneral)/barWidth)*(self.maxSliderValue-self.minSliderValue))
-
-#define convertValueToPoint
+#define controlPointXCoord (((([self.relativeControlValue intValue]-self.minSliderValue)/(self.maxSliderValue-self.minSliderValue))*(barWidth))+paddingGeneral)
+#define convertLastPointToValue ceil((((self.lastPoint-paddingGeneral)/barWidth)*(self.maxSliderValue-self.minSliderValue))+self.minSliderValue)
 
 #define paddingGeneral 15
-
 #define triangleHeight 15
-
 #define knobLengthAndWidth 20
 
 @implementation KTSliderControl{
@@ -33,12 +27,14 @@
     BOOL isInTrackingMode;
 }
 
+@synthesize relativeControlValue = _relativeControlValue;
+
 #pragma mark - Initializers
 - (id)initWithFrame:(CGRect)frame
 {
     self = [super initWithFrame:frame];
     if (self) {
-        self.backgroundColor = [UIColor clearColor];
+        [self performInitialization];
     }
     return self;
 }
@@ -52,16 +48,21 @@
 
 -(void)performInitialization{
     self.backgroundColor = [UIColor clearColor];
-    self.relativeControlValue = 50;
-    self.minSliderValue = 0;
-    self.maxSliderValue = 100;
-    self.lastPoint = controlPointXCoord;
     if (!self.barInnerColorLeft) {
         self.barInnerColorLeft = [UIColor yellowColor];
     }
     if (!self.barInnerColorRight) {
         self.barInnerColorRight = [UIColor greenColor];
     }
+    
+    if (!self.minSliderValue) { self.minSliderValue = 0;
+    }
+    if (!self.maxSliderValue) { self.maxSliderValue = 100;
+    }
+    if (!self.relativeControlValue) { self.relativeControlValue = @50;
+    }
+    
+    self.lastPoint = controlPointXCoord;
     
     [self configureValueLabels];
 }
@@ -82,8 +83,18 @@
     NSLog(@"lastpoint=%i", (int)self.lastPoint);
     [currValueLabel setCenter:CGPointMake(self.lastPoint, barHeightMid)];
     NSLog(@"%@", NSStringFromCGRect(currValueLabel.frame));
-    currValueLabel.text = [NSString stringWithFormat:@"%d", (int)convertLastPointToValue];
+    currValueLabel.text = [NSString stringWithFormat:@"%i", (int)convertLastPointToValue];
 }
+
+#pragma mark - Setters/Getters
+
+-(void)setRelativeControlValue:(NSNumber *)relativeControlValue{
+    _relativeControlValue = relativeControlValue;
+    self.lastPoint = controlPointXCoord;
+    [self setNeedsDisplay];
+    [self setNeedsLayout];
+}
+
 
 #pragma mark - UIControl Methods
 -(BOOL)beginTrackingWithTouch:(UITouch *)touch withEvent:(UIEvent *)event{
@@ -122,7 +133,7 @@
     
     CGContextRef context = UIGraphicsGetCurrentContext();
     [self drawBar:context];
-    //[self drawUndertone:context];
+    [self drawUndertone:context];
     [self drawControlTriangle:context];
     [self drawKnob:context];
 }
@@ -144,7 +155,6 @@
     }
     CGContextSetLineWidth(context, self.frame.size.height/4);
     CGContextMoveToPoint(context, controlPointXCoord, barHeightMid);
-    NSLog(@"%f", self.lastPoint);
     CGContextAddLineToPoint(context, self.lastPoint, barHeightMid);
     CGContextSetShadowWithColor(context, CGSizeMake(0, 0), 2, [UIColor blackColor].CGColor);
     CGContextStrokePath(context);
@@ -180,7 +190,7 @@
     {
         CGContextSetShadowWithColor(context, CGSizeMake(0, 0), 2, [UIColor blackColor].CGColor);
         CGRect handleRect = CGRectMake(xCoord,barHeightMid-(knobLengthAndWidth/2), knobLengthAndWidth, knobLengthAndWidth);
-        [[UIColor colorWithWhite:1.0 alpha:0.4]set];
+        [[UIColor colorWithWhite:1.0 alpha:0.55]set];
         CGContextFillEllipseInRect(context, handleRect);
     }
     
