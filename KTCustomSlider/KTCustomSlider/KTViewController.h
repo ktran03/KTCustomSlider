@@ -11,5 +11,6 @@
 
 @interface KTViewController : UIViewController
 
+@property (weak, nonatomic) IBOutlet UILabel *displayLabel;
 
 @end
