@@ -25,6 +25,8 @@
 @property(assign)double triangleSize;
 @property(assign)double knobSize;
 
+@property(assign)BOOL isControlValueOptionOn;
+
 -(void)updateDisplay;
 
 @end
