@@ -16,9 +16,7 @@
 
 
 @implementation KTSliderControl{
-    UILabel *minLabel;
-    UILabel *maxLabel;
-    UILabel *currValueLabel;
+    int lastPoint;
     UIColor *glowColor;
     UIColor *glowColorKnob;
     int undertoneFirstPoint;
@@ -33,26 +31,26 @@
 {
     self = [super initWithFrame:frame];
     if (self) {
-        minLabel = [[UILabel alloc] init];
-        minLabel.textColor = [UIColor grayColor];
-        minLabel.font = [UIFont fontWithName:@"Helvetica Neue" size:12.0];
-        minLabel.textAlignment = NSTextAlignmentCenter;
-        [minLabel setFrame:CGRectMake(0, 0, 40, 40)];
-        [self addSubview:minLabel];
+        self.minLabel = [[UILabel alloc] init];
+        self.minLabel.textColor = [UIColor grayColor];
+        self.minLabel.font = [UIFont fontWithName:@"Helvetica Neue" size:12.0];
+        self.minLabel.textAlignment = NSTextAlignmentCenter;
+        [self.minLabel setFrame:CGRectMake(0, 0, 40, 40)];
+        [self addSubview:self.minLabel];
         
-        maxLabel = [[UILabel alloc] init];
-        maxLabel.textColor = [UIColor grayColor];
-        maxLabel.font = [UIFont fontWithName:@"Helvetica Neue" size:12.0];
-        maxLabel.textAlignment = NSTextAlignmentCenter;
-        [maxLabel setFrame:CGRectMake(0, 0, 40, 40)];
-        [self addSubview:maxLabel];
+        self.maxLabel = [[UILabel alloc] init];
+        self.maxLabel.textColor = [UIColor grayColor];
+        self.maxLabel.font = [UIFont fontWithName:@"Helvetica Neue" size:12.0];
+        self.maxLabel.textAlignment = NSTextAlignmentCenter;
+        [self.maxLabel setFrame:CGRectMake(0, 0, 40, 40)];
+        [self addSubview:self.maxLabel];
         
-        currValueLabel = [[UILabel alloc] init];
-        currValueLabel.textColor = [UIColor grayColor];
-        currValueLabel.font = [UIFont fontWithName:@"Helvetica Neue" size:12.0];
-        currValueLabel.textAlignment = NSTextAlignmentCenter;
-        [currValueLabel setFrame:CGRectMake(0, 0, 40, 40)];
-        [self addSubview:currValueLabel];
+        self.currValueLabel = [[UILabel alloc] init];
+        self.currValueLabel.textColor = [UIColor grayColor];
+        self.currValueLabel.font = [UIFont fontWithName:@"Helvetica Neue" size:12.0];
+        self.currValueLabel.textAlignment = NSTextAlignmentCenter;
+        [self.currValueLabel setFrame:CGRectMake(0, 0, 40, 40)];
+        [self addSubview:self.currValueLabel];
         
         glowColorKnob = [UIColor grayColor];
 
@@ -61,7 +59,7 @@
 }
 
 -(void)updateDisplay{
-    self.lastPoint = controlPointXCoord;
+    lastPoint = controlPointXCoord;
     [self calculateCurrentValue];
     [self update];
     [self setNeedsDisplay];
@@ -82,8 +80,8 @@
     
     trianglePath = self.isControlValueOptionOn ? [self createBezierPathForTriangle] : nil;
     undertoneFirstPoint = self.isControlValueOptionOn ? controlPointXCoord : self.barMargin - endcapLength;
-    [minLabel setCenter:CGPointMake(self.barMargin, verticalCenter+(self.barHeight/2)+minMaxFromVerticalCenter)];
-    [maxLabel setCenter:CGPointMake(self.barMargin+barWidth, verticalCenter+(self.barHeight/2)+minMaxFromVerticalCenter)];
+    [self.minLabel setCenter:CGPointMake(self.barMargin, verticalCenter+(self.barHeight/2)+minMaxFromVerticalCenter)];
+    [self.maxLabel setCenter:CGPointMake(self.barMargin+barWidth, verticalCenter+(self.barHeight/2)+minMaxFromVerticalCenter)];
     
     [self updateValueLabels];
 }
@@ -103,10 +101,10 @@
 }
 
 -(void)updateValueLabels{
-    [currValueLabel setCenter:CGPointMake(self.lastPoint, verticalCenter)];
-    currValueLabel.text = [NSString stringWithFormat:@"%i", self.currentValue];
-    minLabel.text = [NSString stringWithFormat:@"%d", (int)self.minSliderValue];
-    maxLabel.text = [NSString stringWithFormat:@"%d", (int)self.maxSliderValue];
+    [self.currValueLabel setCenter:CGPointMake(lastPoint, verticalCenter)];
+    self.currValueLabel.text = [NSString stringWithFormat:@"%i", self.currentValue];
+    self.minLabel.text = [NSString stringWithFormat:@"%d", (int)self.minSliderValue];
+    self.maxLabel.text = [NSString stringWithFormat:@"%d", (int)self.maxSliderValue];
 }
 
 -(void)layoutSubviews{
@@ -114,7 +112,7 @@
 }
 
 -(void)calculateCurrentValue{
-    self.currentValue = ceil((((self.lastPoint-self.barMargin)/barWidth)*(self.maxSliderValue-self.minSliderValue))+self.minSliderValue);
+    _currentValue = ceil((((lastPoint-self.barMargin)/barWidth)*(self.maxSliderValue-self.minSliderValue))+self.minSliderValue);
 }
 
 #pragma mark - UIControl Methods
@@ -141,14 +139,14 @@
     isInTrackingMode = YES;
     
     CGPoint lastPointUserTouched = [touch locationInView:self];
-    self.lastPoint = lastPointUserTouched.x;
+    lastPoint = lastPointUserTouched.x;
     
-    if (self.lastPoint<=(self.barMargin)) {
-        self.lastPoint = self.barMargin;
+    if (lastPoint<=(self.barMargin)) {
+        lastPoint = self.barMargin;
     }
     
-    if (self.lastPoint>=(self.frame.size.width-(self.barMargin))) {
-        self.lastPoint = self.frame.size.width-(self.barMargin);
+    if (lastPoint>=(self.frame.size.width-(self.barMargin))) {
+        lastPoint = self.frame.size.width-(self.barMargin);
     }
     
     
@@ -166,7 +164,7 @@
     CGContextRef context = UIGraphicsGetCurrentContext();
     [self drawBar:context];
     [self drawControlTriangle:context];
-    if (isInTrackingMode) {
+    if (isInTrackingMode || !self.isControlValueOptionOn ) {
         [self drawUndertone:context];
     }
 
@@ -184,14 +182,14 @@
 }
 
 -(void)drawUndertone:(CGContextRef)context{
-    if (self.lastPoint>controlPointXCoord) {
+    if (lastPoint>controlPointXCoord) {
         [self.barUndertoneRight set];
     }else{
         [self.barUndertoneLeft set];
     }
     CGContextSetLineCap(context,0);
     CGContextMoveToPoint(context, undertoneFirstPoint, verticalCenter);
-    CGContextAddLineToPoint(context, self.lastPoint, verticalCenter);
+    CGContextAddLineToPoint(context, lastPoint, verticalCenter);
     CGContextSetShadowWithColor(context, CGSizeMake(0, 0), 0, glowColor.CGColor);
     CGContextStrokePath(context);
 }
@@ -210,7 +208,7 @@
 -(void)drawKnob:(CGContextRef)context{
     
     float xCoord;
-    xCoord = isInTrackingMode ? (self.lastPoint - (self.knobSize/2)) : (controlPointXCoord - (self.knobSize/2));
+    xCoord = isInTrackingMode ? (lastPoint - (self.knobSize/2)) : (controlPointXCoord - (self.knobSize/2));
     CGContextSaveGState(context);
     
     {

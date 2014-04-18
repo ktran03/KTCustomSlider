@@ -32,9 +32,13 @@
     slider.knobSize = 27;
     
     slider.barColor = [UIColor lightGrayColor];
-    slider.barUndertoneLeft = [UIColor yellowColor];
-    slider.barUndertoneRight = [UIColor orangeColor];
-        
+    slider.barUndertoneLeft = [UIColor blueColor];
+    slider.barUndertoneRight = [UIColor blueColor];
+    
+    slider.minLabel.hidden = YES;
+    slider.maxLabel.hidden = YES;
+    slider.currValueLabel.hidden = YES;
+    
     [slider updateDisplay];
     [slider addTarget:self action:@selector(sliderValue:) forControlEvents:UIControlEventValueChanged];
     [self.view addSubview:slider];
