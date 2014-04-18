@@ -10,7 +10,8 @@
 
 #define barWidth (self.frame.size.width - (self.barMargin*2))
 #define barWidthMid (barWidth/2)
-#define barHeightMid self.frame.size.height/2
+
+#define verticalCenter self.frame.size.height/2
 
 #define controlPointXCoord ((((self.controlValue-self.minSliderValue)/(self.maxSliderValue-self.minSliderValue))*(barWidth))+self.barMargin)
 #define convertLastPointToValue
@@ -31,19 +32,39 @@
 {
     self = [super initWithFrame:frame];
     if (self) {
-        [self performInitialization];
+        minLabel = [[UILabel alloc] init];
+        minLabel.textColor = [UIColor grayColor];
+        minLabel.font = [UIFont fontWithName:@"Helvetica Neue" size:12.0];
+        minLabel.textAlignment = NSTextAlignmentCenter;
+        [minLabel setFrame:CGRectMake(0, 0, 40, 40)];
+        [self addSubview:minLabel];
+        
+        maxLabel = [[UILabel alloc] init];
+        maxLabel.textColor = [UIColor grayColor];
+        maxLabel.font = [UIFont fontWithName:@"Helvetica Neue" size:12.0];
+        maxLabel.textAlignment = NSTextAlignmentCenter;
+        [maxLabel setFrame:CGRectMake(0, 0, 40, 40)];
+        [self addSubview:maxLabel];
+        
+        currValueLabel = [[UILabel alloc] init];
+        currValueLabel.textColor = [UIColor grayColor];
+        currValueLabel.font = [UIFont fontWithName:@"Helvetica Neue" size:13.0];
+        currValueLabel.textAlignment = NSTextAlignmentCenter;
+        [currValueLabel setFrame:CGRectMake(0, 0, 40, 40)];
+        [self addSubview:currValueLabel];
     }
     return self;
 }
 
--(id)initWithCoder:(NSCoder *)aDecoder{
-    if(self = [super initWithCoder:aDecoder]) {
-        [self performInitialization];
-    }
-    return self;
+-(void)updateDisplay{
+    self.lastPoint = controlPointXCoord;
+    [self calculateCurrentValue];
+    [self update];
+    [self setNeedsDisplay];
+    [self setNeedsLayout];
 }
 
--(void)performInitialization{
+-(void)update{
     self.backgroundColor = [UIColor clearColor];
     if (!self.barInnerColorLeft) {
         self.barInnerColorLeft = [UIColor yellowColor];
@@ -59,33 +80,25 @@
     if (!self.controlValue) { self.controlValue = 50;
     }
     
-    self.lastPoint = controlPointXCoord;
-    [self calculateCurrentValue];
-    
-    currValueLabel = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, 40, 40)];
-    currValueLabel.textColor = [UIColor grayColor];
-    currValueLabel.font = [UIFont fontWithName:@"Helvetica Neue" size:13.0];
-    currValueLabel.textAlignment = NSTextAlignmentCenter;
-    [self addSubview:currValueLabel];
-    
-    [self updateValueLabel];
+    int pad = 15;
+    [minLabel setCenter:CGPointMake(self.barMargin, verticalCenter+(self.barHeight/2)+pad)];
+    [maxLabel setCenter:CGPointMake(self.barMargin+barWidth, verticalCenter+(self.barHeight/2)+pad)];
+
+    [self updateValueLabels];
 }
 
--(void)updateValueLabel{
-    [currValueLabel setCenter:CGPointMake(self.lastPoint, barHeightMid)];
+-(void)updateValueLabels{
+    [currValueLabel setCenter:CGPointMake(self.lastPoint, verticalCenter)];
     currValueLabel.text = [NSString stringWithFormat:@"%i", self.currentValue];
+    minLabel.text = [NSString stringWithFormat:@"%d", (int)self.minSliderValue];
+    maxLabel.text = [NSString stringWithFormat:@"%d", (int)self.maxSliderValue];
 }
 
 -(void)layoutSubviews{
-    [self updateValueLabel];
+    [self updateValueLabels];
 }
 
--(void)updateDisplay{
-    self.lastPoint = controlPointXCoord;
-    [self calculateCurrentValue];
-    [self setNeedsDisplay];
-    [self setNeedsLayout];
-}
+
 
 -(void)calculateCurrentValue{
     self.currentValue = ceil((((self.lastPoint-self.barMargin)/barWidth)*(self.maxSliderValue-self.minSliderValue))+self.minSliderValue);
@@ -137,9 +150,9 @@
 
 -(void)drawBar:(CGContextRef)context{
     [[UIColor grayColor] set];
-    CGContextSetLineWidth(context,barHeightMid/2);
-    CGContextMoveToPoint(context,self.barMargin,barHeightMid);
-    CGContextAddLineToPoint(context,self.frame.size.width-self.barMargin, barHeightMid);
+    CGContextSetLineWidth(context,self.barHeight);
+    CGContextMoveToPoint(context,self.barMargin,verticalCenter);
+    CGContextAddLineToPoint(context,self.frame.size.width-self.barMargin, verticalCenter);
     CGContextSetShadowWithColor(context, CGSizeMake(0, 0), 2, [UIColor blackColor].CGColor);
     CGContextStrokePath(context);
 }
@@ -151,8 +164,8 @@
         [self.barInnerColorLeft set];
     }
     CGContextSetLineWidth(context, self.frame.size.height/4);
-    CGContextMoveToPoint(context, controlPointXCoord, barHeightMid);
-    CGContextAddLineToPoint(context, self.lastPoint, barHeightMid);
+    CGContextMoveToPoint(context, controlPointXCoord, verticalCenter);
+    CGContextAddLineToPoint(context, self.lastPoint, verticalCenter);
     CGContextSetShadowWithColor(context, CGSizeMake(0, 0), 2, [UIColor blackColor].CGColor);
     CGContextStrokePath(context);
 }
@@ -163,7 +176,7 @@
     
     CGPoint firstPoint = CGPointZero;
     firstPoint.x = controlPointXCoord;
-    firstPoint.y = barHeightMid+5;
+    firstPoint.y = verticalCenter+5;
     [trianglePath moveToPoint:firstPoint];
     [trianglePath addLineToPoint:CGPointMake(firstPoint.x+(triangleWidth/2.0), firstPoint.y+self.triangleSize)];
     [trianglePath addLineToPoint:CGPointMake(firstPoint.x-(triangleWidth/2.0), firstPoint.y+self.triangleSize)];
@@ -186,7 +199,7 @@
     
     {
         CGContextSetShadowWithColor(context, CGSizeMake(0, 0), 2, [UIColor blackColor].CGColor);
-        CGRect handleRect = CGRectMake(xCoord,barHeightMid-(self.knobSize/2), self.knobSize, self.knobSize);
+        CGRect handleRect = CGRectMake(xCoord,verticalCenter-(self.knobSize/2), self.knobSize, self.knobSize);
         [[UIColor colorWithWhite:1.0 alpha:0.55]set];
         CGContextFillEllipseInRect(context, handleRect);
     }

@@ -20,6 +20,7 @@
 @property(strong,nonatomic)UIColor *barInnerColorLeft;
 @property(strong,nonatomic)UIColor *barInnerColorRight;
 
+@property(assign)double barHeight;
 @property(assign)double barMargin;
 @property(assign)double triangleSize;
 @property(assign)double knobSize;
