@@ -13,12 +13,17 @@
 @property(assign)float lastPoint;
 @property(assign)float currentValue;
 
-
-@property(strong,nonatomic)NSNumber *relativeControlValue;
+@property(strong,nonatomic)NSNumber *controlValue;
 @property(assign)float maxSliderValue;
 @property(assign)float minSliderValue;
 
 @property(strong,nonatomic)UIColor *barInnerColorLeft;
 @property(strong,nonatomic)UIColor *barInnerColorRight;
+
+@property(assign)NSUInteger barMargin;
+@property(assign)NSUInteger triangleSize;
+@property(assign)NSUInteger knobSize;
+
+
 
 @end

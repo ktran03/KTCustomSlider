@@ -8,16 +8,15 @@
 
 #import "KTSliderControl.h"
 
-#define barWidth (self.frame.size.width - (paddingGeneral*2))
+#define barWidth (self.frame.size.width - (self.barMargin*2))
 #define barWidthMid (barWidth/2)
 #define barHeightMid self.frame.size.height/2
 
-#define controlPointXCoord (((([self.relativeControlValue intValue]-self.minSliderValue)/(self.maxSliderValue-self.minSliderValue))*(barWidth))+paddingGeneral)
-#define convertLastPointToValue ceil((((self.lastPoint-paddingGeneral)/barWidth)*(self.maxSliderValue-self.minSliderValue))+self.minSliderValue)
+#define controlPointXCoord (((([self.controlValue intValue]-self.minSliderValue)/(self.maxSliderValue-self.minSliderValue))*(barWidth))+self.barMargin)
 
-#define paddingGeneral 15
-#define triangleHeight 15
-#define knobLengthAndWidth 20
+
+#define convertLastPointToValue ceil((((self.lastPoint-self.barMargin)/barWidth)*(self.maxSliderValue-self.minSliderValue))+self.minSliderValue)
+
 
 @implementation KTSliderControl{
     UILabel *minLabel;
@@ -27,7 +26,7 @@
     BOOL isInTrackingMode;
 }
 
-@synthesize relativeControlValue = _relativeControlValue;
+@synthesize controlValue = _controlValue;
 
 #pragma mark - Initializers
 - (id)initWithFrame:(CGRect)frame
@@ -59,7 +58,7 @@
     }
     if (!self.maxSliderValue) { self.maxSliderValue = 100;
     }
-    if (!self.relativeControlValue) { self.relativeControlValue = @50;
+    if (!self.controlValue) { self.controlValue = @50;
     }
     
     self.lastPoint = controlPointXCoord;
@@ -88,8 +87,8 @@
 
 #pragma mark - Setters/Getters
 
--(void)setRelativeControlValue:(NSNumber *)relativeControlValue{
-    _relativeControlValue = relativeControlValue;
+-(void)setcontrolValue:(NSNumber *)controlValue{
+    _controlValue = controlValue;
     self.lastPoint = controlPointXCoord;
     [self setNeedsDisplay];
     [self setNeedsLayout];
@@ -109,12 +108,12 @@
     CGPoint lastPointUserTouched = [touch locationInView:self];
     self.lastPoint = lastPointUserTouched.x;
     
-    if (self.lastPoint<=(paddingGeneral)) {
-        self.lastPoint = paddingGeneral;
+    if (self.lastPoint<=(self.barMargin)) {
+        self.lastPoint = self.barMargin;
     }
     
-    if (self.lastPoint>=(self.frame.size.width-(paddingGeneral))) {
-        self.lastPoint = self.frame.size.width-(paddingGeneral);
+    if (self.lastPoint>=(self.frame.size.width-(self.barMargin))) {
+        self.lastPoint = self.frame.size.width-(self.barMargin);
     }
     
     [self sendActionsForControlEvents:UIControlEventValueChanged];
@@ -141,8 +140,8 @@
 -(void)drawBar:(CGContextRef)context{
     [[UIColor grayColor] set];
     CGContextSetLineWidth(context,barHeightMid/2);
-    CGContextMoveToPoint(context,paddingGeneral,barHeightMid);
-    CGContextAddLineToPoint(context,self.frame.size.width-paddingGeneral, barHeightMid);
+    CGContextMoveToPoint(context,self.barMargin,barHeightMid);
+    CGContextAddLineToPoint(context,self.frame.size.width-self.barMargin, barHeightMid);
     CGContextSetShadowWithColor(context, CGSizeMake(0, 0), 2, [UIColor blackColor].CGColor);
     CGContextStrokePath(context);
 }
@@ -162,14 +161,14 @@
 
 -(void)drawControlTriangle:(CGContextRef)context{
     UIBezierPath *trianglePath = [[UIBezierPath alloc] init];
-    CGFloat triangleWidth = triangleHeight;
+    CGFloat triangleWidth = self.triangleSize;
     
     CGPoint firstPoint = CGPointZero;
     firstPoint.x = controlPointXCoord;
     firstPoint.y = barHeightMid+5;
     [trianglePath moveToPoint:firstPoint];
-    [trianglePath addLineToPoint:CGPointMake(firstPoint.x+(triangleWidth/2.0), firstPoint.y+triangleHeight)];
-    [trianglePath addLineToPoint:CGPointMake(firstPoint.x-(triangleWidth/2.0), firstPoint.y+triangleHeight)];
+    [trianglePath addLineToPoint:CGPointMake(firstPoint.x+(triangleWidth/2.0), firstPoint.y+self.triangleSize)];
+    [trianglePath addLineToPoint:CGPointMake(firstPoint.x-(triangleWidth/2.0), firstPoint.y+self.triangleSize)];
     [trianglePath closePath];
     CGContextSaveGState(context);
     {
@@ -184,12 +183,12 @@
 -(void)drawKnob:(CGContextRef)context{
     
     float xCoord;
-    xCoord = isInTrackingMode ? (self.lastPoint - (knobLengthAndWidth/2)) : (controlPointXCoord - (knobLengthAndWidth/2));
+    xCoord = isInTrackingMode ? (self.lastPoint - (self.knobSize/2)) : (controlPointXCoord - (self.knobSize/2));
     CGContextSaveGState(context);
     
     {
         CGContextSetShadowWithColor(context, CGSizeMake(0, 0), 2, [UIColor blackColor].CGColor);
-        CGRect handleRect = CGRectMake(xCoord,barHeightMid-(knobLengthAndWidth/2), knobLengthAndWidth, knobLengthAndWidth);
+        CGRect handleRect = CGRectMake(xCoord,barHeightMid-(self.knobSize/2), self.knobSize, self.knobSize);
         [[UIColor colorWithWhite:1.0 alpha:0.55]set];
         CGContextFillEllipseInRect(context, handleRect);
     }

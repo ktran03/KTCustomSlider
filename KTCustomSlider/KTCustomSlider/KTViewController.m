@@ -19,15 +19,16 @@
 {
     [super viewDidLoad];
     
-    KTSliderControl *slider = [[KTSliderControl alloc]initWithFrame:CGRectMake(10, 50, 280, 30)];
-    
-    slider.barInnerColorLeft = [UIColor purpleColor];
-    slider.barInnerColorRight = [UIColor redColor];
-    
-    slider.maxSliderValue = 87654;
-    slider.minSliderValue = 999;
-    slider.relativeControlValue = @3467;
-    
+    KTSliderControl *slider = [[KTSliderControl alloc]initWithFrame:CGRectMake(10, 50, 280, 50)];
+    slider.barInnerColorLeft = [UIColor colorWithRed:0.0f green:100.0f blue:255.0f alpha:1.0];
+    slider.barInnerColorRight = [UIColor whiteColor];
+    slider.minSliderValue = 0;
+    slider.maxSliderValue = 100;
+    slider.barMargin = 25;
+    slider.triangleSize = 15;
+    slider.knobSize = 35;
+    slider.controlValue = @50;
+
     [self.view addSubview:slider];
     
 }
