@@ -21,7 +21,7 @@
     UILabel *minLabel;
     UILabel *maxLabel;
     UILabel *currValueLabel;
-    
+    UIColor *glowColor;
     BOOL isInTrackingMode;
 }
 
@@ -152,7 +152,7 @@
     CGContextSetLineCap(context,kCGLineCapRound);
     CGContextMoveToPoint(context,self.barMargin,verticalCenter);
     CGContextAddLineToPoint(context,self.frame.size.width-self.barMargin, verticalCenter);
-    CGContextSetShadowWithColor(context, CGSizeMake(0, 0), 2, [UIColor blackColor].CGColor);
+    CGContextSetShadowWithColor(context, CGSizeMake(0, 0), 5, [UIColor blackColor].CGColor);
     CGContextStrokePath(context);
 }
 
@@ -172,9 +172,13 @@
 -(void)drawControlTriangle:(CGContextRef)context{
     UIBezierPath *trianglePath = [[UIBezierPath alloc] init];
     CGFloat triangleWidth = self.triangleSize;
-    
+    if (self.lastPoint>controlPointXCoord) {
+        glowColor = self.barInnerColorRight;
+    }else{
+        glowColor = self.barInnerColorLeft;
+    }
     CGPoint firstPoint = CGPointZero;
-    int pad = 5;
+    int pad = 10;
     firstPoint.x = controlPointXCoord;
     firstPoint.y = verticalCenter+pad;
     [trianglePath moveToPoint:firstPoint];
@@ -183,6 +187,7 @@
     [trianglePath closePath];
     CGContextSaveGState(context);
     {
+        CGContextSetShadowWithColor(context, CGSizeMake(0, 0), 2, glowColor.CGColor);
         CGContextAddPath(context, trianglePath.CGPath);
         CGContextSetFillColorWithColor(context, [UIColor whiteColor].CGColor);
         CGContextFillPath(context);
@@ -198,7 +203,7 @@
     CGContextSaveGState(context);
     
     {
-        CGContextSetShadowWithColor(context, CGSizeMake(0, 0), 2, [UIColor blackColor].CGColor);
+        CGContextSetShadowWithColor(context, CGSizeMake(0, 0), 6, [UIColor blackColor].CGColor);
         CGRect handleRect = CGRectMake(xCoord,verticalCenter-(self.knobSize/2), self.knobSize, self.knobSize);
         [[UIColor colorWithWhite:1.0 alpha:0.55]set];
         CGContextFillEllipseInRect(context, handleRect);
