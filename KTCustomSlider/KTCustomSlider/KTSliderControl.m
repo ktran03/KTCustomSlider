@@ -30,8 +30,6 @@
     UILabel *maxLabel;
     UILabel *currValueLabel;
     
-    int pointsPerUnit;
-    
     BOOL isInTrackingMode;
 }
 
@@ -54,7 +52,7 @@
 
 -(void)performInitialization{
     self.backgroundColor = [UIColor clearColor];
-    self.relativeControlValue = 0;
+    self.relativeControlValue = 50;
     self.minSliderValue = 0;
     self.maxSliderValue = 100;
     self.lastPoint = controlPointXCoord;
@@ -65,24 +63,25 @@
         self.barInnerColorRight = [UIColor greenColor];
     }
     
-    pointsPerUnit = barWidth / (self.maxSliderValue - self.minSliderValue);
-    
     [self configureValueLabels];
 }
 
 -(void)configureValueLabels{
     currValueLabel = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, 40, 40)];
     [currValueLabel setCenter:CGPointMake(controlPointXCoord, barHeightMid)];
+    NSLog(@"%@", NSStringFromCGRect(currValueLabel.frame));
     currValueLabel.textColor = [UIColor grayColor];
     currValueLabel.font = [UIFont fontWithName:@"Helvetica Neue" size:10.0];
     currValueLabel.textAlignment = NSTextAlignmentCenter;
-    currValueLabel.text = [NSString stringWithFormat:@"%f", self.relativeControlValue];
+    currValueLabel.text = [NSString stringWithFormat:@"%i", (int)convertLastPointToValue];
     [self addSubview:currValueLabel];
+    
 }
 
 -(void)layoutSubviews{
-    NSLog(@"%f", convertLastPointToValue);
+    NSLog(@"lastpoint=%i", (int)self.lastPoint);
     [currValueLabel setCenter:CGPointMake(self.lastPoint, barHeightMid)];
+    NSLog(@"%@", NSStringFromCGRect(currValueLabel.frame));
     currValueLabel.text = [NSString stringWithFormat:@"%d", (int)convertLastPointToValue];
 }
 
@@ -106,8 +105,6 @@
     if (self.lastPoint>=(self.frame.size.width-(paddingGeneral))) {
         self.lastPoint = self.frame.size.width-(paddingGeneral);
     }
-    
-    NSLog(@"%f", convertLastPointToValue);
     
     [self sendActionsForControlEvents:UIControlEventValueChanged];
     [self setNeedsDisplay];
@@ -177,7 +174,7 @@
 -(void)drawKnob:(CGContextRef)context{
     
     float xCoord;
-    xCoord = isInTrackingMode ? (self.lastPoint - (knobLengthAndWidth/2)) : (paddingGeneral-(knobLengthAndWidth/2));
+    xCoord = isInTrackingMode ? (self.lastPoint - (knobLengthAndWidth/2)) : (controlPointXCoord - (knobLengthAndWidth/2));
     CGContextSaveGState(context);
     
     {
