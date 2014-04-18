@@ -141,7 +141,9 @@
     
     CGContextRef context = UIGraphicsGetCurrentContext();
     [self drawBar:context];
-    [self drawUndertone:context];
+    if (isInTrackingMode) {
+        [self drawUndertone:context];
+    }
     [self drawControlTriangle:context];
     [self drawKnob:context];
 }
