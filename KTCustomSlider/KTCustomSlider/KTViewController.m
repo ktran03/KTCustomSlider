@@ -115,12 +115,12 @@
     
     slider.barHeight = 7;
     slider.barMargin = 30;
-    slider.triangleSize = 20;
+    slider.triangleSize = 5;
     slider.knobSize = 45;
     
-    slider.minLabel.font = [UIFont fontWithName:@"Ariel-Bold" size:22.0f];
+    slider.minLabel.font = [UIFont fontWithName:@"Ariel-Bold" size:17.0f];
     slider.minLabel.textColor = [UIColor purpleColor];
-    slider.maxLabel.font = [UIFont fontWithName:@"Ariel-Bold" size:22.0f];
+    slider.maxLabel.font = [UIFont fontWithName:@"Ariel-Bold" size:17.0f];
     slider.maxLabel.textColor = [UIColor cyanColor];
 
     slider.barColor = [UIColor lightGrayColor];
@@ -136,16 +136,21 @@
     KTSliderControl *slider = [[KTSliderControl alloc]initWithFrame:CGRectMake(10, 450, 300, 80)];
     
     slider.minSliderValue = 0;
-    slider.maxSliderValue = 10000;
+    slider.maxSliderValue = 9999;
     slider.controlValue = 4983;
     slider.isControlValueOptionOn = YES;
     
-    slider.barHeight = 7;
+    slider.barHeight = 20;
     slider.barMargin = 45;
     slider.triangleSize = 10;
     slider.knobSize = 65;
     
     slider.currValueLabel.font = [UIFont fontWithName:@"Arial-Bold" size:25.0f];
+    
+    slider.minLabel.font = [UIFont fontWithName:@"Ariel-Bold" size:29.0f];
+    slider.minLabel.textColor = [UIColor yellowColor];
+    slider.maxLabel.font = [UIFont fontWithName:@"Ariel-Bold" size:29.0f];
+    slider.maxLabel.textColor = [UIColor magentaColor];
     
     slider.barColor = [UIColor lightGrayColor];
     slider.barUndertoneLeft = [UIColor yellowColor];
