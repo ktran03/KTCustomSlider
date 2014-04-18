@@ -10,7 +10,8 @@
 
 @interface KTSliderControl : UIControl
 
-@property(assign)double lastPoint;
+@property(assign)int lastPoint;
+@property(assign)int currentValue;
 
 @property(assign)double controlValue;
 @property(assign)double maxSliderValue;

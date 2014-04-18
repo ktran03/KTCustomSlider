@@ -13,7 +13,7 @@
 #define barHeightMid self.frame.size.height/2
 
 #define controlPointXCoord ((((self.controlValue-self.minSliderValue)/(self.maxSliderValue-self.minSliderValue))*(barWidth))+self.barMargin)
-#define convertLastPointToValue ceil((((self.lastPoint-self.barMargin)/barWidth)*(self.maxSliderValue-self.minSliderValue))+self.minSliderValue)
+#define convertLastPointToValue
 
 
 @implementation KTSliderControl{
@@ -60,30 +60,35 @@
     }
     
     self.lastPoint = controlPointXCoord;
+    [self calculateCurrentValue];
     
-    [self configureValueLabels];
-}
-
--(void)configureValueLabels{
     currValueLabel = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, 40, 40)];
-    [currValueLabel setCenter:CGPointMake(controlPointXCoord, barHeightMid)];
     currValueLabel.textColor = [UIColor grayColor];
-    currValueLabel.font = [UIFont fontWithName:@"Helvetica Neue" size:10.0];
+    currValueLabel.font = [UIFont fontWithName:@"Helvetica Neue" size:13.0];
     currValueLabel.textAlignment = NSTextAlignmentCenter;
-    currValueLabel.text = [NSString stringWithFormat:@"%i", (int)convertLastPointToValue];
     [self addSubview:currValueLabel];
     
+    [self updateValueLabel];
+}
+
+-(void)updateValueLabel{
+    [currValueLabel setCenter:CGPointMake(self.lastPoint, barHeightMid)];
+    currValueLabel.text = [NSString stringWithFormat:@"%i", self.currentValue];
 }
 
 -(void)layoutSubviews{
-    [currValueLabel setCenter:CGPointMake(self.lastPoint, barHeightMid)];
-    currValueLabel.text = [NSString stringWithFormat:@"%i", (int)convertLastPointToValue];
+    [self updateValueLabel];
 }
 
 -(void)updateDisplay{
     self.lastPoint = controlPointXCoord;
+    [self calculateCurrentValue];
     [self setNeedsDisplay];
     [self setNeedsLayout];
+}
+
+-(void)calculateCurrentValue{
+    self.currentValue = ceil((((self.lastPoint-self.barMargin)/barWidth)*(self.maxSliderValue-self.minSliderValue))+self.minSliderValue);
 }
 
 #pragma mark - UIControl Methods
@@ -98,7 +103,7 @@
     
     CGPoint lastPointUserTouched = [touch locationInView:self];
     self.lastPoint = lastPointUserTouched.x;
-    
+
     if (self.lastPoint<=(self.barMargin)) {
         self.lastPoint = self.barMargin;
     }
@@ -107,10 +112,11 @@
         self.lastPoint = self.frame.size.width-(self.barMargin);
     }
     
-    NSLog(@"%f", convertLastPointToValue);
-    [self sendActionsForControlEvents:UIControlEventValueChanged];
+    [self calculateCurrentValue];
     [self setNeedsDisplay];
     [self setNeedsLayout];
+    [self sendActionsForControlEvents:UIControlEventValueChanged];
+
     return YES;
 }
 

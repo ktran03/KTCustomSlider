@@ -20,18 +20,26 @@
     [super viewDidLoad];
     
     KTSliderControl *slider = [[KTSliderControl alloc]initWithFrame:CGRectMake(10, 50, 280, 50)];
-    slider.barInnerColorLeft = [UIColor colorWithRed:0.0f green:100.0f blue:255.0f alpha:1.0];
-    slider.barInnerColorRight = [UIColor whiteColor];
-    slider.minSliderValue = 39;
-    slider.maxSliderValue = 100000;
-    slider.controlValue = 23467;
+    
+    slider.minSliderValue = 0;
+    slider.maxSliderValue = 100;
+    slider.controlValue = 74;
+    
     slider.barMargin = 30;
-    slider.triangleSize = 15;
-    slider.knobSize = 35;
+    slider.triangleSize = 10;
+    slider.knobSize = 30;
+    
+    slider.barInnerColorLeft = [UIColor yellowColor];
+    slider.barInnerColorRight = [UIColor orangeColor];
     
     [slider updateDisplay];
+    [slider addTarget:self action:@selector(sliderValue:) forControlEvents:UIControlEventValueChanged];
     [self.view addSubview:slider];
     
+}
+
+-(void)sliderValue:(KTSliderControl*)slider{
+    NSLog(@"Current value = %d", slider.currentValue);
 }
 
 - (void)didReceiveMemoryWarning
