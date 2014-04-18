@@ -73,11 +73,12 @@
     int minMaxFromVerticalCenter = 15;
 
     self.backgroundColor = [UIColor clearColor];
-    self.barInnerColorLeft = self.barInnerColorLeft ? self.barInnerColorLeft : [UIColor yellowColor];
-    self.barInnerColorRight = self.barInnerColorRight ? self.barInnerColorRight : [UIColor greenColor];
-    self.minSliderValue = self.minSliderValue ? self.minSliderValue : 0;
-    self.maxSliderValue = self.maxSliderValue ? self.maxSliderValue : 100;
-    self.controlValue = self.controlValue ? self.controlValue : 50;
+    self.barColor = self.barColor ? : [UIColor lightGrayColor];
+    self.barUndertoneLeft = self.barUndertoneLeft ? : [UIColor yellowColor];
+    self.barUndertoneRight = self.barUndertoneRight ? : [UIColor greenColor];
+    self.minSliderValue = self.minSliderValue ? : 0;
+    self.maxSliderValue = self.maxSliderValue ? : 100;
+    self.controlValue = self.controlValue ? : 50;
     
     trianglePath = self.isControlValueOptionOn ? [self createBezierPathForTriangle] : nil;
     undertoneFirstPoint = self.isControlValueOptionOn ? controlPointXCoord : self.barMargin - endcapLength;
@@ -173,7 +174,7 @@
 }
 
 -(void)drawBar:(CGContextRef)context{
-    [[UIColor lightGrayColor] set];
+    [self.barColor set];
     CGContextSetLineWidth(context,self.barHeight);
     CGContextSetLineCap(context,kCGLineCapRound);
     CGContextMoveToPoint(context,self.barMargin,verticalCenter);
@@ -184,9 +185,9 @@
 
 -(void)drawUndertone:(CGContextRef)context{
     if (self.lastPoint>controlPointXCoord) {
-        [self.barInnerColorRight set];
+        [self.barUndertoneRight set];
     }else{
-        [self.barInnerColorLeft set];
+        [self.barUndertoneLeft set];
     }
     CGContextSetLineCap(context,0);
     CGContextMoveToPoint(context, undertoneFirstPoint, verticalCenter);

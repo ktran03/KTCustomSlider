@@ -31,8 +31,9 @@
     slider.triangleSize = 10;
     slider.knobSize = 27;
     
-    slider.barInnerColorLeft = [UIColor yellowColor];
-    slider.barInnerColorRight = [UIColor orangeColor];
+    slider.barColor = [UIColor lightGrayColor];
+    slider.barUndertoneLeft = [UIColor yellowColor];
+    slider.barUndertoneRight = [UIColor orangeColor];
         
     [slider updateDisplay];
     [slider addTarget:self action:@selector(sliderValue:) forControlEvents:UIControlEventValueChanged];

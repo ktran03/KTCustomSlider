@@ -17,9 +17,10 @@
 @property(assign)double maxSliderValue;
 @property(assign)double minSliderValue;
 
-@property(strong,nonatomic)UIColor *barInnerColorLeft;
-@property(strong,nonatomic)UIColor *barInnerColorRight;
+@property(strong,nonatomic)UIColor *barUndertoneLeft;
+@property(strong,nonatomic)UIColor *barUndertoneRight;
 
+@property(strong,nonatomic)UIColor *barColor;
 @property(assign)double barHeight;
 @property(assign)double barMargin;
 @property(assign)double triangleSize;
