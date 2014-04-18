@@ -33,9 +33,7 @@
     
     slider.barInnerColorLeft = [UIColor yellowColor];
     slider.barInnerColorRight = [UIColor orangeColor];
-    
-    slider.
-    
+        
     [slider updateDisplay];
     [slider addTarget:self action:@selector(sliderValue:) forControlEvents:UIControlEventValueChanged];
     [self.view addSubview:slider];

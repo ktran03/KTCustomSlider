@@ -10,11 +10,9 @@
 
 #define barWidth (self.frame.size.width - (self.barMargin*2))
 #define barWidthMid (barWidth/2)
-
 #define verticalCenter self.frame.size.height/2
 
 #define controlPointXCoord ((((self.controlValue-self.minSliderValue)/(self.maxSliderValue-self.minSliderValue))*(barWidth))+self.barMargin)
-#define convertLastPointToValue
 
 
 @implementation KTSliderControl{
@@ -71,46 +69,36 @@
 }
 
 -(void)update{
-    self.backgroundColor = [UIColor clearColor];
-    if (!self.barInnerColorLeft) {
-        self.barInnerColorLeft = [UIColor yellowColor];
-    }
-    if (!self.barInnerColorRight) {
-        self.barInnerColorRight = [UIColor greenColor];
-    }
-    
-    if (!self.minSliderValue) { self.minSliderValue = 0;
-    }
-    if (!self.maxSliderValue) { self.maxSliderValue = 100;
-    }
-    if (!self.controlValue) { self.controlValue = 50;
-    }
-    
     int endcapLength = 2;
+    int minMaxFromVerticalCenter = 15;
+
+    self.backgroundColor = [UIColor clearColor];
+    self.barInnerColorLeft = self.barInnerColorLeft ? self.barInnerColorLeft : [UIColor yellowColor];
+    self.barInnerColorRight = self.barInnerColorRight ? self.barInnerColorRight : [UIColor greenColor];
+    self.minSliderValue = self.minSliderValue ? self.minSliderValue : 0;
+    self.maxSliderValue = self.maxSliderValue ? self.maxSliderValue : 100;
+    self.controlValue = self.controlValue ? self.controlValue : 50;
+    
+    trianglePath = self.isControlValueOptionOn ? [self createBezierPathForTriangle] : nil;
     undertoneFirstPoint = self.isControlValueOptionOn ? controlPointXCoord : self.barMargin - endcapLength;
+    [minLabel setCenter:CGPointMake(self.barMargin, verticalCenter+(self.barHeight/2)+minMaxFromVerticalCenter)];
+    [maxLabel setCenter:CGPointMake(self.barMargin+barWidth, verticalCenter+(self.barHeight/2)+minMaxFromVerticalCenter)];
     
-    
-    int pad = 15;
-    [minLabel setCenter:CGPointMake(self.barMargin, verticalCenter+(self.barHeight/2)+pad)];
-    [maxLabel setCenter:CGPointMake(self.barMargin+barWidth, verticalCenter+(self.barHeight/2)+pad)];
-    
-    if (self.isControlValueOptionOn) {
-        trianglePath = [[UIBezierPath alloc] init];
-        CGFloat triangleWidth = self.triangleSize;
-        CGPoint firstPoint = CGPointZero;
-        int pad2 = 10;
-        firstPoint.x = controlPointXCoord;
-        firstPoint.y = verticalCenter+pad2;
-        [trianglePath moveToPoint:firstPoint];
-        [trianglePath addLineToPoint:CGPointMake(firstPoint.x+(triangleWidth/2.0), firstPoint.y+self.triangleSize)];
-        [trianglePath addLineToPoint:CGPointMake(firstPoint.x-(triangleWidth/2.0), firstPoint.y+self.triangleSize)];
-        [trianglePath closePath];
-    }else{
-        trianglePath = nil;
-    }
-
-
     [self updateValueLabels];
+}
+
+-(UIBezierPath*)createBezierPathForTriangle{
+    UIBezierPath *path = [[UIBezierPath alloc] init];
+    CGFloat triangleWidth = self.triangleSize;
+    CGPoint firstPoint = CGPointZero;
+    int pad2 = 10;
+    firstPoint.x = controlPointXCoord;
+    firstPoint.y = verticalCenter+pad2;
+    [path moveToPoint:firstPoint];
+    [path addLineToPoint:CGPointMake(firstPoint.x+(triangleWidth/2.0), firstPoint.y+self.triangleSize)];
+    [path addLineToPoint:CGPointMake(firstPoint.x-(triangleWidth/2.0), firstPoint.y+self.triangleSize)];
+    [path closePath];
+    return path;
 }
 
 -(void)updateValueLabels{
