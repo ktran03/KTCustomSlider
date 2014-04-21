@@ -11,9 +11,7 @@
 #define barWidth (self.frame.size.width - (self.barMargin*2))
 #define barWidthMid (barWidth/2)
 #define verticalCenter self.frame.size.height/2
-
 #define controlPointXCoord ((((self.controlValue-self.minSliderValue)/(self.maxSliderValue-self.minSliderValue))*(barWidth))+self.barMargin)
-
 
 @implementation KTSliderControl{
     int lastPoint;
@@ -26,6 +24,13 @@
 
 @synthesize controlValue = _controlValue;
 
+/**
+ *  Initialization method. Call this method to begin initialization of a KTSliderControl
+ *
+ *  @param idinitWithFrame:CGRect The frame used to draw.
+ *
+ *  @return id
+ */
 #pragma mark - Initializers
 - (id)initWithFrame:(CGRect)frame
 {
@@ -58,6 +63,9 @@
     return self;
 }
 
+/**
+ *  Call this method to refresh calculations and update display
+ */
 -(void)updateDisplay{
     lastPoint = controlPointXCoord;
     [self calculateCurrentValue];
@@ -66,6 +74,9 @@
     [self setNeedsLayout];
 }
 
+/**
+ *  Calls from updateDisplay, completes necessary value update for refresh
+ */
 -(void)update{
     int endcapLength = 2;
     int minMaxFromVerticalCenter = 15;
@@ -86,6 +97,11 @@
     [self updateValueLabels];
 }
 
+/**
+ *  Method to draw triangle (only used when controlValueOption set to YES)
+ *
+ *  @return the triangle path
+ */
 -(UIBezierPath*)createBezierPathForTriangle{
     UIBezierPath *path = [[UIBezierPath alloc] init];
     CGFloat triangleWidth = self.triangleSize;
@@ -100,6 +116,9 @@
     return path;
 }
 
+/**
+ *  Update the value labels
+ */
 -(void)updateValueLabels{
     [self.currValueLabel setCenter:CGPointMake(lastPoint, verticalCenter)];
     self.currValueLabel.text = [NSString stringWithFormat:@"%i", self.currentValue];
@@ -115,7 +134,15 @@
     _currentValue = ceil((((lastPoint-self.barMargin)/barWidth)*(self.maxSliderValue-self.minSliderValue))+self.minSliderValue);
 }
 
+
 #pragma mark - UIControl Methods
+/**
+ *  Tracking method begin
+ *
+ *  @param
+ *
+ *  @return return YES to begin tracking
+ */
 -(BOOL)beginTrackingWithTouch:(UITouch *)touch withEvent:(UIEvent *)event{
     [super beginTrackingWithTouch:touch withEvent:event];
     glowColorKnob = [UIColor lightGrayColor];
@@ -123,18 +150,38 @@
     return YES;
 }
 
+/**
+ *  Tracking method continuation after begin
+ *
+ *  @param touch A UITouch object
+ *  @param event A UIEvent object
+ *
+ *  @return return YES for continuous tracking
+ */
 -(BOOL)continueTrackingWithTouch:(UITouch *)touch withEvent:(UIEvent *)event{
     [super continueTrackingWithTouch:touch withEvent:event];
     [self prepareForTrackingWithTouch:touch withEvent:event];
     return YES;
 }
 
+/**
+ *  End tracking
+ *
+ *  @param touch A UITouch object
+ *  @param event A UIEvent object
+ */
 -(void)endTrackingWithTouch:(UITouch *)touch withEvent:(UIEvent *)event{
     [super endTrackingWithTouch:touch withEvent:event];
     glowColorKnob = [UIColor grayColor];
     [self prepareForTrackingWithTouch:touch withEvent:event];
 }
 
+/**
+ *  Does the necessary preparation before refreshing view for slider
+ *
+ *  @param touch A UITouch object
+ *  @param event A UIEvent object
+ */
 -(void)prepareForTrackingWithTouch:(UITouch *)touch withEvent:(UIEvent *)event{
     isInTrackingMode = YES;
     
@@ -149,8 +196,6 @@
         lastPoint = self.frame.size.width-(self.barMargin);
     }
     
-    
-    
     [self calculateCurrentValue];
     [self setNeedsDisplay];
     [self setNeedsLayout];
@@ -158,6 +203,11 @@
 }
 
 #pragma mark - Draw Methods
+/**
+ *  Main drawRect method. Used to draw contents to screen
+ *
+ *  @param rect the rectangle to be drawn to
+ */
 -(void)drawRect:(CGRect)rect{
     [super drawRect:rect];
     
@@ -171,6 +221,11 @@
     [self drawKnob:context];
 }
 
+/**
+ *  Method that draws the bar
+ *
+ *  @param context the current graphics context
+ */
 -(void)drawBar:(CGContextRef)context{
     [self.barColor set];
     CGContextSetLineWidth(context,self.barHeight);
@@ -181,6 +236,11 @@
     CGContextStrokePath(context);
 }
 
+/**
+ *  Method that draws the left or right, or singular undertone
+ *
+ *  @param context the current graphics context
+ */
 -(void)drawUndertone:(CGContextRef)context{
     if (lastPoint>controlPointXCoord) {
         [self.barUndertoneRight set];
@@ -194,6 +254,11 @@
     CGContextStrokePath(context);
 }
 
+/**
+ *  Method that draws the control value triangle
+ *
+ *  @param context the current graphics context
+ */
 -(void)drawControlTriangle:(CGContextRef)context{
     CGContextSaveGState(context);
     {
@@ -205,6 +270,11 @@
     CGContextRestoreGState(context);
 }
 
+/**
+ *  Method that draws the knob
+ *
+ *  @param context the current graphics context
+ */
 -(void)drawKnob:(CGContextRef)context{
     
     float xCoord;
