@@ -4,7 +4,7 @@
   <img src="http://i.imgur.com/tWAAlEw.gif" alt=“KTCustomSlider” title=“KT”CustomSlider>
 </p>
 
-KTCustomSlider is a highly customizable slider control for iOS and Mac OS X. It can be made to look exactly like UISlider, or any other way you like. It also has a ‘control value option’ that displays a triangle at the control value, and alternate undertone colours. 
+KTCustomSlider is a highly customizable slider control for iOS. It can be made to look exactly like UISlider, or any other way you like. It also has a ‘control value option’ used as a point of comparison.
 
 ## Usage
 
@@ -37,6 +37,10 @@ KTCustomSlider is a highly customizable slider control for iOS and Mac OS X. It 
 ## Maintainer
 
 - [Khanh Tran](http://github.com/ktran03) ([@khanhvinhtran](https://twitter.com/KhanhVinhTran)) 
+
+## Questions - Comments - Suggestions
+
+Contact above, fire away. 
 
 ## License
 KTCustomSlider is available under the MIT license. See license file for more info.
