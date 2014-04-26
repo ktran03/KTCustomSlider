@@ -1,7 +1,7 @@
 ## KTCustomSlider
 
 <p align=“left” >
-  <img src="http://i.imgur.com/tWAAlEw.gif" alt=“KTCustomSlider” title=“KT”CustomSlider>
+  <img src="http://i.imgur.com/iqNSiQI.gif" alt=“KTCustomSlider” title=“KT”CustomSlider>
 </p>
 
 KTCustomSlider is an iOS slider with an added functionality, a control point. The control point is used to compare the current value to a previously selected value (set by the control point). The bar highlight colour changes around the control point.
