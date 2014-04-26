@@ -4,26 +4,26 @@
   <img src="http://i.imgur.com/tWAAlEw.gif" alt=“KTCustomSlider” title=“KT”CustomSlider>
 </p>
 
-KTCustomSlider is a highly customizable slider control for iOS. It can be made to look exactly like UISlider, or any other way you like. It also has a ‘control value option’ used as a point of comparison.
+KTCustomSlider is an iOS slider with an added functionality, a control point. The control point is used to compare the current value to a previously selected value (set by the control point). The bar highlight colour changes around the control point.
 
 ## Usage
 
 ```objective-c
-    KTSliderControl *slider = [[KTSliderControl alloc]initWithFrame:CGRectMake(10, 100, 300, 50)];
+    KTSliderControl *slider = [[KTSliderControl alloc]initWithFrame:CGRectMake(10, 200, 300, 50)];
     
     slider.minSliderValue = 0;
-    slider.maxSliderValue = 10;
-    slider.controlValue = 5;
-    slider.isControlValueOptionOn = NO;
+    slider.maxSliderValue = 100;
+    slider.controlValue = 65;
+    slider.isControlValueOptionOn = YES;
     
-    slider.barHeight = 2;
+    slider.barHeight = 10;
     slider.barMargin = 30;
     slider.triangleSize = 10;
     slider.knobSize = 27;
     
     slider.barColor = [UIColor lightGrayColor];
-    slider.barUndertoneLeft = [UIColor blueColor];
-    slider.barUndertoneRight = [UIColor blueColor];
+    slider.barUndertoneLeft = [UIColor cyanColor];
+    slider.barUndertoneRight = [UIColor greenColor];
     
     slider.minLabel.hidden = YES;
     slider.maxLabel.hidden = YES;
